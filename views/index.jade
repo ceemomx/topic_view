@@ -1,5 +1,33 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+    #main
+        #sidebar
+            .panel
+                .header
+                    span.col_fade 个人信息
+                .inner
+                    .user_card
+                        a.user_avatar(href="/user/kezhi")
+                            img(src="https://avatars.githubusercontent.com/u/5857517?v=3&amp;s=120" title="kezhi")
+                        span.user_name
+                            a.dark(href="/user/kezhi") kezhi
+                        .space.clearfix
+                        span.signature 这家伙很懒，什么个性签名都没有留下
+        #content
+            .panel
+                .inner.no-padding
+                    #topic_list
+                        .cell
+                            a.user_avatar.pull-left
+                                img(src="https://avatars.githubusercontent.com/u/5857517?v=3&amp;s=120" title="kezhi")
+                            a.topic_title(href="/") ［活动］创业松鼠全球嘉年华上海站：一个周末启动你的创业项目！
+                            a.last_time.pull-right(href="/")
+                                span.last_active_time 03-18 15:30
+                        .cell
+                            a.user_avatar.pull-left
+                                img(src="https://avatars.githubusercontent.com/u/5857517?v=3&amp;s=120" title="kezhi")
+                            a.topic_title(href="/") ［活动］创业松鼠全球嘉年华上海站：一个周末启动你的创业项目！
+                            a.last_time.pull-right(href="/")
+                                span.last_active_time 03-18 15:30
+

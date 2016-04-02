@@ -4,9 +4,14 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var session      = require('express-session')
+var MongoStore   = require('connect-mongo')(session);
+var mongoose     = require('mongoose');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
+
+require('./db');
 
 var app = express();
 
@@ -21,6 +26,19 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+var half_hour = 3600000 / 2;
+
+app.use(session({
+	store: new MongoStore({ mongooseConnection: mongoose.connection }),
+	secret: 'kz-bbs@me',
+	resave: false,
+	saveUninitialized: true,
+	cookie: {
+		secure: false,
+		maxAge: half_hour
+	}
+}));
 
 app.use('/', routes);
 app.use('/users', users);
@@ -56,5 +74,10 @@ app.use(function(err, req, res, next) {
   });
 });
 
+var debug = require('debug')('kz-bbs');
+app.set('port', process.env.PORT || 3001);
+var server = app.listen(app.get('port'), function() {
+	debug('Express server listening on port ' + server.address().port);
+});
 
 module.exports = app;

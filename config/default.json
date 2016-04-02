@@ -1,0 +1,10 @@
+{
+  "domain": "kz-bbs.cn",
+  "port": "3000",
+  "is_debug": true,
+  "mongodb": {
+    "host": "127.0.0.1",
+    "port": "27017",
+    "db": "kz-bbs"
+  }
+}
