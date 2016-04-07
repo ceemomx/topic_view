@@ -1,7 +1,4 @@
 var check_session_is_expired;
-var config = require('config');
-var is_debug  = config.get('is_debug');
-
 check_session_is_expired = function(req, res, next) {
 	if (req.session.current_user) {
 		console.dir(req.session.current_user);
@@ -9,7 +6,7 @@ check_session_is_expired = function(req, res, next) {
 		var user = req.session.current_user;
 		return next();
 	} else {
-		console.log('no session user');
+		console.log('no session');
 		return res.json({
 			data:null,
 			status: {

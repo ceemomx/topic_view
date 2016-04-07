@@ -23,14 +23,4 @@ router.get('/users/userinfo/:uid', check_session, users.api.userinfo);
 
 
 
-
-
-/*router.get('/', function (req,res,next) {
-	return res.api({
-		a:1,
-		b:2
-	});
-	//res.render('index', { title: '天津呆萌小斑马科技有限公司' });
-});*/
-
 module.exports = router;
