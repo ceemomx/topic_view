@@ -4,20 +4,28 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var session      = require('express-session')
+var session      = require('express-session');
 var MongoStore   = require('connect-mongo')(session);
 var mongoose     = require('mongoose');
+var res_api      = require('res.api');
 
-var routes = require('./routes/index');
-var users = require('./routes/users');
+var routes = require('./app/routes/index');
+var users = require('./app/routes/users');
 
 require('./db');
 
 var app = express();
+app.use(res_api);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
+app.set('view options', {
+	pretty: true,
+	debug: true,
+	cache: true,
+	compileDebug: true
+});
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));

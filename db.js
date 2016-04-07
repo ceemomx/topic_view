@@ -17,9 +17,6 @@ options = {
     auto_reconnect: true,
     poolSize: 5
   }
-  //,
-  // user: 'guojia',
-  // pass: 'guojia.ng'
 };
 
 mongoose.connect(connectionString, options, function(err, res) {
