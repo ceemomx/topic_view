@@ -3,13 +3,12 @@ var mongoose = require('mongoose');
 var moment = require('moment');
 var Promise = require("bluebird");
 /* GET listing. */
-var posts = require('../models/posts');
+var Topic = require('../models/topic');
 
 exports.api = {
-	/** 库存列表 **/
-	posts_list: function(req, res){
-		//var posts = req.model.PostModel;
-		posts.findAsync({}).then(function(data){
+	/** 话题列表 **/
+	topic_list: function(req, res){
+		Topic.findAsync({}).then(function(data){
 			console.log('list:'+data);
 			var json = [];
 			for(var i = 0; i < data.length; i++) {
@@ -27,7 +26,7 @@ exports.api = {
 			return res.api(err)
 		})
 	}
-	/** 库存商品详情 **/
+	/** 话题详情 **/
 	/*view: function(req, res){
 		var id = req.params.id;
 		console.log(id)

@@ -1,0 +1,50 @@
+<div id="main">
+	<div id="sidebar">
+		<div class="panel">
+			<div class="header">
+				<span class="col_fade">个人信息</span>
+			</div>
+			<div class="inner">
+				<div class="user_card">
+					<a class="user_avatar" href="/user/kezhi"><img src="https://avatars.githubusercontent.com/u/5857517?v=3&amp;s=120" title="kezhi"/></a>
+					<span class="user_name"><a class="dark" href="/user/kezhi">kezhi</a></span>
+					<div class="space clearfix"></div>
+					<span class="signature">这家伙很懒，什么个性签名都没有留下</span>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="content">
+		<div class="panel">
+			<div class="header">
+				<ul class="breadcrumb">
+					<li><a href="/">主页</a><span class="divider">/</span></li>
+					<li class="active">登录</li>
+				</ul>
+			</div>
+			<div class="inner">
+				<div class="form-horizontal">
+					<br/><br/>
+					<div class="control-group">
+						<label class="control-label" for="name">用户名</label>
+						<div class="controls">
+							<input class="input-xlarge" id="name" name="name" size="30" type="text" autocomplete="off" ng-model="user.name">
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label" for="pass">密码</label>
+
+						<div class="controls">
+							<input class="input-xlarge" id="pass" name="pass" size="30" type="password" autocomplete="off" ng-model="user.pass">
+						</div>
+					</div>
+					<input type="hidden" name="_csrf" value="lu41Hhbx-5SaC1CIJV4HQXbX93dhtqth1g4s">
+
+					<div class="form-actions">
+						<input type="button" ng-click="login(user)" class="span-primary" value="登录">
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

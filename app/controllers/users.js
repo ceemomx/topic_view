@@ -1,4 +1,3 @@
-//var users_service = require('mount-services')(__dirname).users_service;
 var moment = require('moment');
 var User = require('../models/users');
 // -- custom api
@@ -15,8 +14,7 @@ exports.api = {
 			var half_hour;
 			if (err) {
 				console.dir('error:'+err);
-				req.session.current_user = void 0;
-				res.api({msg:'登录失败'});
+				res.api({code:1,msg:'登录失败'});
 			} else {
 				req.session.current_user = sur;
 				half_hour = 3600000 / 2;
@@ -48,16 +46,18 @@ exports.api = {
 	},
 	userinfo: function (req,res) {
 		var _user = req.session.current_user;
-		var uid = req.params.uid;
-		console.dir('userinfo--'+_user,uid);
+		//var uid = req.params.uid;
+		console.dir('userinfo--'+_user);
 		User.findById(_user._id,function (err, info) {
 			info = info.toJSON();
 			info.created_at = moment(info.created_at).format("YYYY年MM月DD日");
 			res.api(info);
-			/*res.render('admin/userinfo', {
-				title: '个人信息',
-				user: info
-			})*/
 		})
 	}
+	/*logout: function (req,res) {
+		var uid = req.session.current_user;
+		req.session.destroy(function(err) {
+			console.log(err)
+		})
+	}*/
 };

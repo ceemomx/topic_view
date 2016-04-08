@@ -29,6 +29,7 @@ app.set('view options', {
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+app.use(favicon(__dirname + '/public/favicon.ico'));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -36,14 +37,10 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 var half_hour = 3600000 / 2;
-
 app.use(session({
 	store: new MongoStore({ mongooseConnection: mongoose.connection }),
 	secret: 'kz-bbs@me',
-	resave: false,
-	saveUninitialized: true,
 	cookie: {
-		secure: false,
 		maxAge: half_hour
 	}
 }));

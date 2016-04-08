@@ -1,0 +1,25 @@
+/**
+* created by kezhi
+**/
+.toast-container {
+	position: absolute;
+	top: 50%;
+	margin-top: -24px;
+	width: 100%;
+	text-align: center;
+	z-index: 2000;
+}
+
+.toast-container .toast {
+	min-width: 260px;
+	max-width: 280px;
+	width: auto;
+	padding: 13px 15px;
+	font-size: 16px;
+	line-height: 22px;
+	color: #fff;
+	margin: 0 auto;
+	border-radius: 2px;
+	display: inline-block;
+	background: rgba(0, 0, 0, 0.8);
+}
