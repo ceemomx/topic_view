@@ -1,6 +1,9 @@
 /**
 * created by kezhi
 **/
+.clear{
+	clear: both;
+}
 .toast-container {
 	position: absolute;
 	top: 50%;
@@ -22,4 +25,36 @@
 	border-radius: 2px;
 	display: inline-block;
 	background: rgba(0, 0, 0, 0.8);
+}
+.edui-default .edui-editor{
+	border: none !important;
+}
+.head-url{
+	width: 80px;
+	height: 80px;
+}
+.upfile{
+	border: none;
+	box-shadow:none;
+	height: 16px !important;
+	line-height: 16px !important;
+	padding: 5px 0;
+}
+.upfile-style{
+	background: #efefef;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	padding: 3px 5px;
+}
+.radio label{
+	float: left;
+	margin-right: 10px;
+	width: 60px;
+}
+.radio input{
+	border:none;
+	box-shadow:none
+}
+.left40{
+	padding-left: 40px;
 }

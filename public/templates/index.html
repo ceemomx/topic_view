@@ -1,3 +1,19 @@
+<div class="navbar">
+	<div class="navbar-inner">
+		<div class="container">
+			<a class="brand" href="/">
+				<!--<img src="//o4j806krb.qnssl.com/public/images/cnodejs_light.svg">-->
+			</a>
+			<ul class="nav pull-right">
+				<li><a href="#/">首页</a></li>
+				<li><a href="#/about" target="">关于</a></li>
+				<li><a href="#/setting">设置</a></li>
+				<li ng-show="userinfo==null?true:false"><a href="#/register" rel="nofollow">注册</a></li>
+				<li><a ng-click="log(userinfo)" href="javascript:;" rel="nofollow">{{userinfo==null?'登录':'退出'}}</a></li>
+			</ul>
+		</div>
+	</div>
+</div>
 <div id="main">
 	<div id="sidebar">
 		<div class="panel" ng-show="userinfo==null?false:true">
@@ -6,10 +22,10 @@
 			</div>
 			<div class="inner">
 				<div class="user_card">
-					<a class="user_avatar" href="/user/kezhi"><img src="https://avatars.githubusercontent.com/u/5857517?v=3&amp;s=120" title="kezhi"/></a>
-					<span class="user_name"><a class="dark" href="/user/kezhi">{{userinfo.username}}</a></span>
+					<a class="user_avatar" href="#/user/{{userinfo._id}}"><img ng-src="{{userinfo.head?userinfo.head:'/images/me.jpg'}}" title="kezhi"/></a>
+					<span class="user_name"><a class="dark" href="#/user/{{userinfo._id}}">{{userinfo.username}}</a></span>
 					<div class="space clearfix"></div>
-					<span class="signature">这家伙很懒，什么个性签名都没有留下</span>
+					<span class="signature">{{userinfo.signature?'“ '+userinfo.signature+' “':'“这家伙很懒，什么个性签名都没有留下。”'}}</span>
 				</div>
 			</div>
 		</div>
@@ -18,20 +34,17 @@
 				<p>Node.js专业中文社区</p>
 				<div>
 					您可以
-					<a href="/signin">登录</a>
+					<a href="#/register">注册</a>
 					或
-					<a href="/signup">注册</a>
-					, 也可以
-					<a href="/auth/github">
+					<a href="#/login">
           				<span class="span-info">登录</span>
 					</a>
 				</div>
 			</div>
-
 		</div>
 		<div class="panel">
 			<div class="inner">
-				<a href="/topic/create" id="create_topic_btn">
+				<a href="#/post-topic" id="create_topic_btn">
 					<span class="span-success">发布话题</span>
 				</a>
 			</div>
@@ -41,14 +54,16 @@
 		<div class="panel">
 			<div class="inner">
 				<div id="topic_list">
-					<div class="cell">
-						<a class="user_avatar pull-left" href="">
-							<img src="https://avatars.githubusercontent.com/u/5857517?v=3&amp;s=120" title="kezhi"/>
+					<div class="cell" ng-repeat="topic in topic_list">
+						<a class="user_avatar pull-left " href="#/userinfo/{{topic.uid}}">
+							<img ng-src="{{topic.user_head?topic.user_head:'/images/me.jpg'}}" title="kezhi"/>
 						</a>
-						<a class="topic_title" href="/">［活动］创业松鼠全球嘉年华上海站：一个周末启动你的创业项目！</a>
-						<a class="last_time pull-right" href="/">
-							<span class="last_active_time">03-18 15:30</span>
+						<a class="last_time pull-right" href="#/topic-view/{{topic.id}}">
+							<span class="last_active_time">{{topic.created_at}}</span>
 						</a>
+						<div class="topic_title_wrapper left40">
+							<a class="topic_title" href="#/topic-view/{{topic.id}}">{{topic.title}}</a>
+						</div>
 					</div>
 				</div>
 			</div>

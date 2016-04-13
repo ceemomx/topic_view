@@ -1,0 +1,97 @@
+<div class="navbar">
+	<div class="navbar-inner">
+		<div class="container">
+			<a class="brand" href="/">
+				<!--<img src="//o4j806krb.qnssl.com/public/images/cnodejs_light.svg">-->
+			</a>
+			<ul class="nav pull-right">
+				<li><a href="#/">首页</a></li>
+				<li><a href="#/about" target="">关于</a></li>
+				<li><a href="#/setting">设置</a></li>
+				<li><a ng-click="log(user)" href="javascript:;" rel="nofollow">退出</a></li>
+			</ul>
+		</div>
+	</div>
+</div>
+<div id="main">
+	<div id="sidebar">
+		<div class="panel">
+			<div class="header">
+				<span class="col_fade">个人信息</span>
+			</div>
+			<div class="inner">
+				<div class="user_card">
+					<div>
+						<a class="user_avatar" href="#/user/{{user._id}}">
+							<img ng-src="{{user.head}}" title="{{user.username}}">
+						</a>
+						<span class="user_name"><a class="dark" href="#/user/{{user._id}}">{{user.username}}</a></span>
+						<div class="space clearfix"></div>
+						<span class="signature">
+						   {{user.signature}}
+						</span>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="panel">
+			<div class="inner">
+				<a href="#/post-topic" id="create_topic_btn">
+					<span class="span-success">发布话题</span>
+				</a>
+			</div>
+		</div>
+	</div>
+	<div id="content">
+		<div class="panel">
+			<div class="header">
+				<ul class="breadcrumb">
+					<li><a href="/">主页</a><span class="divider">/</span></li>
+				</ul>
+			</div>
+			<div class="inner userinfo">
+				<div class="user_big_avatar">
+					<img ng-src="{{user.head}}" class="user_avatar" title="{{user.username}}">
+				</div>
+				<a class="dark">{{user.username}}</a>
+
+				<div class="user_profile">
+					<ul class="unstyled">
+						<li ng-show="user.weibo?true:false">
+							微博：
+							<a class="dark" href="javascript:;" target="_blank">{{user.weibo}}</a>
+						</li>
+						<li ng-show="user.address?true:false">
+							所在地：
+							<span class="">{{user.address}}</span>
+						</li>
+						<li ng-show="user.website?true:false">
+							个人主页：
+							<a class="dark" href="javascript:;" target="_blank">
+								{{user.website}}
+							</a>
+						</li>
+					</ul>
+				</div>
+				<p class="col_fade">注册时间 {{user.created_at}}</p>
+			</div>
+		</div>
+		<div class="panel">
+			<div class="header">
+				<span class="col_fade">最近创建的话题</span>
+			</div>
+
+			<div class="cell" ng-repeat="mytopic in topic">
+    <span class="last_time pull-right">
+      <span class="last_active_time">{{mytopic.created_at}}</span>
+    </span>
+				<div class="topic_title_wrapper">
+					<a class="topic_title" href="#/topic-view/{{mytopic.id}}" title="{{mytopic.title}}">
+						{{mytopic.title}}
+					</a>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</div>

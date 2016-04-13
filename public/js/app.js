@@ -1,4 +1,5 @@
-var app = angular.module('App', ['ngRoute', 'ngControllers']);
+'use strict';
+var app = angular.module('App', ['ngRoute', 'ngControllers','ngServer']);
 app.config(['$routeProvider','$locationProvider',
 	function ($routeProvider,$locationProvider) {
 		//$locationProvider.html5Mode(true);
@@ -15,9 +16,21 @@ app.config(['$routeProvider','$locationProvider',
 				templateUrl: 'templates/index.html',
 				controller: 'IndexCtrl'
 			})
-			.when('/header', {
-				templateUrl: 'templates/header.html',
-				//controller: 'HeaderCtrl'
+			.when('/post-topic', {
+				templateUrl: 'templates/post-topic.html',
+				controller: 'PostTopicCtrl'
+			})
+			.when('/topic-view/:id', {
+				templateUrl: 'templates/topic-view.html',
+				controller: 'TopicViewCtrl'
+			})
+			.when('/user/:id', {
+				templateUrl: 'templates/user.html',
+				controller: 'UserCtrl'
+			})
+			.when('/setting', {
+				templateUrl: 'templates/setting.html',
+				controller: 'SettingCtrl'
 			})
 			.otherwise({
 				redirectTo: '/'

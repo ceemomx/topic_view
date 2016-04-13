@@ -2,39 +2,29 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<title>走着旅行</title>
 	<meta name="description" content="走着旅行">
 	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"/>
 	<meta content="telephone=no" name="format-detection"/>
 	<base href="/">
 	<link rel="stylesheet" type="text/css" href="style/min.css" media="screen">
+	<!-- 编辑器 ueditor css-->
+	<link rel="stylesheet" type="text/css" href="ueditor/font-awesome/css/font-awesome.min.css">
 	<link rel="stylesheet" type="text/css" href="style/style.css" media="screen">
+	<!-- 编辑器 ueditor.js-->
+	<script type="text/javascript" charset="utf-8" src="ueditor/ueditor.config.js"></script>
+	<script type="text/javascript" charset="utf-8" src="ueditor/ueditor.all.js"></script>
+	<script type="text/javascript" charset="utf-8" src="ueditor/lang/zh-cn/zh-cn.js"></script>
 	<!--angularjs-->
 	<script src="lib/jquery.min.js"></script>
 	<script src="lib/angular.min.js"></script>
 	<script src="lib/angular-route.min.js"></script>
 	<script src="js/common.js"></script>
 	<script src="js/app.js"></script>
+	<script src="js/server.js"></script>
 	<script src="js/controller.js"></script>
 </head>
 <body ng-app="App">
-<div class="navbar" ng-controller="HeaderCtrl">
-	<div class="navbar-inner">
-		<div class="container">
-			<a class="brand" href="/">
-				<img src="//o4j806krb.qnssl.com/public/images/cnodejs_light.svg">
-			</a>
-			<ul class="nav pull-right">
-				<li><a href="/">首页</a></li>
-				<li><a href="/about" target="">关于</a></li>
-				<li><a href="/setting">设置</a></li>
-				<li ng-show="userinfo==null?true:false"><a href="#/register" rel="nofollow">注册</a></li>
-				<li><a href="#/login" rel="nofollow">{{userinfo==null?'登录':'退出'}}</a></li>
-			</ul>
-		</div>
-	</div>
-</div>
 <div class="view-container">
 	<div ng-view="ViewFrame" class="view-frame"></div>
 </div>

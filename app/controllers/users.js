@@ -11,15 +11,11 @@ exports.api = {
 			password: password
 		});
 		return _user.is_exist(function(err, sur) {
-			var half_hour;
 			if (err) {
 				console.dir('error:'+err);
 				res.api({code:1,msg:'登录失败'});
 			} else {
 				req.session.current_user = sur;
-				half_hour = 3600000 / 2;
-				req.session.cookie.expires = new Date(Date.now() + half_hour);
-				req.session.cookie.maxAge = half_hour;
 				console.dir('login-session:'+req.session.current_user);
 				res.api(req.session.current_user);
 			}
@@ -45,19 +41,64 @@ exports.api = {
 		});
 	},
 	userinfo: function (req,res) {
+		var uid = req.params.id;
+		console.dir('userid--'+uid);
+		if(!uid){
+			var _user = req.session.current_user;
+			console.dir('userinfo--'+_user);
+			User.findById(_user._id,function (err, info) {
+				info = info.toJSON();
+				info.created_at = moment(info.created_at).format("YYYY年MM月DD日");
+				res.api(info);
+			})
+		}else{
+			User.findById(uid,function (err, info) {
+				info = info.toJSON();
+				info.created_at = moment(info.created_at).format("YYYY年MM月DD日");
+				res.api(info);
+			})
+		}
+	},
+	setting: function (req,res) {
 		var _user = req.session.current_user;
-		//var uid = req.params.uid;
-		console.dir('userinfo--'+_user);
-		User.findById(_user._id,function (err, info) {
-			info = info.toJSON();
-			info.created_at = moment(info.created_at).format("YYYY年MM月DD日");
-			res.api(info);
+		console.dir('setuser--'+_user);
+		var query = {
+			sex:req.body.sex,
+			address:req.body.address,
+			signature:req.body.signature,
+			weibo:req.body.weibo,
+			website:req.body.website
+		};
+		User.findByIdAndUpdate(_user._id,{$set:query},function (err, info) {
+			if(err){
+				console.log('error:'+err);
+				return res.api({
+					status:{
+						code: 1,
+						msg:'保存失败！'
+					}
+				});
+			}else{
+				res.api(info);
+			}
+		})
+	},
+	uploadimage:function(req,res){
+		var user = req.session.current_user;
+		if(req.files.file.path){
+			var imgPath = req.files.file.path.replace(/public/,'');
+			console.log(imgPath);
+			User.findByIdAndUpdate(user._id, {$set:{head: imgPath}},function(){
+				res.status(200).json({
+					file:req.files.file
+				});
+			})
+		}
+
+	},
+	logout: function (req,res) {
+		req.session.destroy(function(err) {
+			res.api(err);
 		})
 	}
-	/*logout: function (req,res) {
-		var uid = req.session.current_user;
-		req.session.destroy(function(err) {
-			console.log(err)
-		})
-	}*/
 };

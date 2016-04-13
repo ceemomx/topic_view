@@ -14,8 +14,10 @@ var UserSchema = new Schema({
 		type: String,
 		required: false
 	},
+	head:String, //头像
 	signature: String, //个性签名
-	phone_number: Number, // 电话号码
+	weibo: String, // 微博
+	website:String, //个人主页
 	address: String, // 地址
 	sex: String,//  性别 0->女 1->男
 	created_at: {
