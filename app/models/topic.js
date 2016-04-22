@@ -2,9 +2,6 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var Promise = require('bluebird');
 
-/**
- 列表
- */
 var TopicSchema = new Schema({
 	title: {
 		type: String,
