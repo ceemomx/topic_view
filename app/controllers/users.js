@@ -90,7 +90,11 @@ exports.api = {
 			console.log(imgPath);
 			User.findByIdAndUpdate(user._id, {$set:{head: imgPath}},function(){
 				res.status(200).json({
-					file:req.files.file
+					data:{path:req.files.file.path},
+					status:{
+						code:0,
+						msg:'上传成功'
+					}
 				});
 			})
 		}

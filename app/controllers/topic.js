@@ -80,7 +80,7 @@ exports.api = {
 	/** 话题详情 **/
 	view: function(req, res){
 		var id = req.params.id;
-		console.log(id)
+		console.log(id);
 		var topic;
 		Topic.findByIdAsync(id).then(function(pro){
 			topic = pro;
@@ -97,6 +97,15 @@ exports.api = {
 			// console.log(json)
 			return res.api(json);
 		})
+	},
+	del: function () {
+		var id = req.params.id;
+		console.log(id);
+		Topic.removeAsync({_id:id}).then(function(u) {
+			console.log(id)
+			return res.api(u)
+		}).catch(function (err) {
+			return res.api(err)
+		});
 	}
-
 };

@@ -92,7 +92,7 @@ ngControllers
 				utils.alert('请输入内容')
 			}else{
 				$http.post(API_URL+'topic/post',topic).success(function (data) {
-					console.log(data)
+					console.log(data);
 					if(data.status.code == 0){
 						utils.alert('发布成功！');
 					}
@@ -104,13 +104,47 @@ ngControllers
 	//话题详情
 	.controller('TopicViewCtrl', function ($scope, $http, $routeParams,$sce) {
 		var id = $routeParams.id;
+		console.log(id)
 		$http.get(API_URL+'topic/'+id).success(function (data) {
-			console.log(data);
+			//console.log(data);
 			if(data.status.code == 0){
 				$scope.content = $sce.trustAsHtml(data.data.content);
 				$scope.topicView = data.data;
 			}
-		})
+		});
+		function commnetList(){
+			$http.get(API_URL+'comment/list/'+id).success(function (data) {
+				console.log(data);
+				if(data.status.code == 0){
+					$scope.commentsLen = data.data.length;
+					for(var i = 0;i<data.data.length;i++){
+						data.data[i].comment = $sce.trustAsHtml(data.data[i].comment);
+					}
+					$scope.comments = data.data;
+				}
+			});
+		}
+		commnetList();
+		$scope.submitContent = function () {
+			var comment = UE.getEditor("container").getContent();
+			console.log(comment);
+			$http.post(API_URL+'comment/post',{topic_id:id,content:comment}).success(function (data) {
+				console.log(data);
+				if(data.status.code == 0){
+					utils.alert('发布成功！');
+					UE.getEditor("container").setContent('');
+					commnetList();
+				}
+			})
+		};
+		$scope.deleteTopic = function () {
+			$http.get(API_URL+'topic/del/'+id).success(function (data) {
+				console.log(data);
+				if(data.status.code == 0){
+					utils.alert('删除成功！');
+				}
+			})
+		}
 	})
 	//话题详情
 	.controller('UserCtrl', function ($scope, $http, $routeParams) {
@@ -151,7 +185,7 @@ ngControllers
 					}
 				}).success(function (data) {
 					console.log(data);   //返回上传后所在的路径
-					var imgPath = data.file.path.split('public')[1];
+					var imgPath = data.data.path.split('public')[1];
 					$('#head-url').attr('src',imgPath);
 					$rootScope.userinfo = {
 						head: imgPath
