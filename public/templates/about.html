@@ -7,7 +7,7 @@
 			<ul class="nav pull-right">
 				<li><a href="#/">首页</a></li>
 				<li><a href="#/about" target="">关于</a></li>
-				<li ng-show="userinfo==null?false:true"><a href="#/setting">设置</a></li>
+				<li><a href="#/setting">设置</a></li>
 				<li ng-show="userinfo==null?true:false"><a href="#/register" rel="nofollow">注册</a></li>
 				<li><a ng-click="log(userinfo)" href="javascript:;" rel="nofollow">{{userinfo==null?'登录':'退出'}}</a></li>
 			</ul>
@@ -15,7 +15,7 @@
 	</div>
 </div>
 <div id="main">
-	<div id="sidebar">
+	<div id="sidebar" ng-controller="SidebarCtrl">
 		<div class="panel" ng-show="userinfo==null?false:true">
 			<div class="header">
 				<span class="col_fade">个人信息</span>
@@ -37,7 +37,7 @@
 					<a href="#/register">注册</a>
 					或
 					<a href="#/login">
-          				<span class="span-info">登录</span>
+						<span class="span-info">登录</span>
 					</a>
 				</div>
 			</div>
@@ -52,18 +52,18 @@
 	</div>
 	<div id="content">
 		<div class="panel">
-			<div class="inner">
-				<div id="topic_list">
-					<div class="cell" ng-repeat="topic in topic_list">
-						<a class="user_avatar pull-left " href="#/userinfo/{{topic.uid}}">
-							<img ng-src="{{topic.user_head?topic.user_head:'/images/me.jpg'}}" title="kezhi"/>
-						</a>
-						<a class="last_time pull-right" href="#/topic-view/{{topic.id}}">
-							<span class="last_active_time">{{topic.created_at}}</span>
-						</a>
-						<div class="topic_title_wrapper left40">
-							<a class="topic_title" href="#/topic-view/{{topic.id}}">{{topic.title}}</a>
-						</div>
+			<div class="header">
+				<ul class="breadcrumb">
+					<li><a href="/">主页</a><span class="divider">/</span></li>
+				</ul>
+			</div>
+			<div class="inner topic">
+				<div class="topic_content">
+					<div class="markdown-text"><h3>关于</h3>
+						<p>本社区为前端交流开源技术社区，致力于nodejs，html5，javascript，angularjs,react,vuejs等web,app前端技术的研究。</p>
+						<p>本社区由柯织创建，欢迎更多专业技术人员以及感兴趣的朋友加入。</p>
+						<p>社区目前由 <a href="https://github.com/kezhi" target="_blank">@kezhi</a> 在维护，有问题请联系：<a href="https://github.com/kezhi" target="_blank">https://github.com/kezhi。</a></p>
+						<p>请关注我们的官方微博：<a href="http://weibo.com/kezhi" target="_blank">http://weibo.com/kezhi。</a></p>
 					</div>
 				</div>
 			</div>

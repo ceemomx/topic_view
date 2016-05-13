@@ -37,7 +37,7 @@ ngControllers
 		server.getSelf(function (user) {
 			console.log(user.data)
 			$scope.userinfo = user.data;
-		})
+		});
 		$http.get(API_URL+'topic/list').success(function (data) {
 			if(data.status.code == 0){
 				$scope.topic_list = data.data;
@@ -78,7 +78,7 @@ ngControllers
 			})
 		}
 	})//发布话题
-	.controller('PostTopicCtrl', function ($scope, $http) {
+	.controller('PostTopicCtrl', function ($scope, $http, $location, $timeout) {
 		$scope.submitContent = function () {
 			console.log(UE.getEditor("container").getContent());
 			var container = UE.getEditor("container").getContent();
@@ -95,6 +95,9 @@ ngControllers
 					console.log(data);
 					if(data.status.code == 0){
 						utils.alert('发布成功！');
+						$timeout(function () {
+							$location.url('/');
+						},1500)
 					}
 				})
 			}
@@ -102,15 +105,29 @@ ngControllers
 		}
 	})
 	//话题详情
-	.controller('TopicViewCtrl', function ($scope, $http, $routeParams,$sce,$location, $timeout,$q) {
+	.controller('TopicViewCtrl', function ($scope, $http, $routeParams,$sce,$location, $timeout,$q,server) {
 		var id = $routeParams.id;
 		console.log(id);
 		var deferred = $q.defer();
 		var promise = deferred.promise;
-		$http.get(API_URL+'users/userinfo').success(function (data) {
-			console.log(data);
-			$scope.user = data.data;
+		server.getSelf(function (user) {
+			$scope.userinfo = user.data;
 		});
+		$scope.log = function(user){
+			console.log(user);
+			if(!user){
+				$location.url('/login');
+			}else{
+				console.log('logout');
+				$http.get(API_URL+'users/logout').success(function(data){
+					console.log(data);
+					utils.alert('您已退出登录！');
+					$timeout(function () {
+						window.location.reload();
+					},1000)
+				})
+			}
+		}
 		promise.then(function () {
 
 		});
@@ -159,7 +176,7 @@ ngControllers
 			})
 		}
 	})
-	//话题详情
+	//用户信息
 	.controller('UserCtrl', function ($scope, $http, $routeParams) {
 		var id = $routeParams.id;
 		$http.get(API_URL+'users/userinfo/'+id).success(function (data) {
@@ -284,6 +301,31 @@ ngControllers
 				}
 			})
 		}
+	})
+	.controller('AboutCtrl', function ($scope, $http, $timeout, $location, server) {
+		server.getSelf(function (user) {
+			$scope.userinfo = user.data;
+		});
+		$scope.log = function(user){
+			console.log(user);
+			if(!user){
+				$location.url('/login');
+			}else{
+				console.log('logout');
+				$http.get(API_URL+'users/logout').success(function(data){
+					console.log(data);
+					utils.alert('您已退出登录！');
+					$timeout(function () {
+						window.location.reload();
+					},1000)
+				})
+			}
+		}
+	})
+	.controller('SidebarCtrl', function ($scope, $http, server) {
+		server.getSelf(function (user) {
+			$scope.userinfo = user.data;
+		});
 	})
 ;
 
