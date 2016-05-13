@@ -5,7 +5,7 @@
 				<!--<img src="//o4j806krb.qnssl.com/public/images/cnodejs_light.svg">-->
 			</a>
 			<ul class="nav pull-right">
-				<li><a href="/">首页</a></li>
+				<li><a href="#/">首页</a></li>
 				<li><a href="/about" target="">关于</a></li>
 				<li><a href="/setting">设置</a></li>
 				<li><a href="#/register" rel="nofollow">注册</a></li>
@@ -41,8 +41,8 @@
 					<span> 发布于 {{topicView.created_at}}</span>
 					<span> 作者 {{topicView.author}}</span>
 				</div>
-				<div id="manage_topic">
-					<a href="/topic/570ce91304e7772f4eb639d8/edit">编辑</a>
+				<div id="manage_topic" ng-show="user==null?false:true">
+					<a href="#/edit-topic/{{topicView.id}}">编辑</a>
 					<a href="javascript:;" class="delete_topic_btn" ng-click="deleteTopic()">删除</a>
 				</div>
 			</div>
@@ -63,7 +63,7 @@
 					<a href="/user/imhered" class="user_avatar"><img ng-src="{{comment.user_head}}" title="imhered"></a>
 					<div class="user_info">
 						<a class="dark reply_author" href="/user/imhered">{{comment.username}}</a>
-						<a class="reply_time" href="#571f38a435af8a704195f426">{{comment.created_at}}</a>
+						<a class="reply_time" href="javascript:;">{{comment.created_at}}</a>
 					</div>
 				</div>
 				<div class="reply_content from-imhered">

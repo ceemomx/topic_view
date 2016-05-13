@@ -32,6 +32,10 @@ app.config(['$routeProvider','$locationProvider',
 				templateUrl: 'templates/setting.html',
 				controller: 'SettingCtrl'
 			})
+			.when('/edit-topic/:id', {
+				templateUrl: 'templates/edit-topic.html',
+				controller: 'EditTopicCtrl'
+			})
 			.otherwise({
 				redirectTo: '/'
 			});

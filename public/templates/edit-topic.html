@@ -1,0 +1,56 @@
+<div class="navbar">
+	<div class="navbar-inner">
+		<div class="container">
+			<a class="brand" href="/">
+				<!--<img src="//o4j806krb.qnssl.com/public/images/cnodejs_light.svg">-->
+			</a>
+			<ul class="nav pull-right">
+				<li><a href="#/">首页</a></li>
+				<li><a href="/about" target="">关于</a></li>
+				<li><a href="/setting">设置</a></li>
+				<li ng-show="userinfo==null?true:false"><a href="#/register" rel="nofollow">注册</a></li>
+				<li><a ng-click="log(userinfo)" href="javascript:;" rel="nofollow">{{userinfo==null?'登录':'退出'}}</a></li>
+			</ul>
+		</div>
+	</div>
+</div>
+<div id="main">
+	<div id="sidebar">
+		<div class="panel">
+			<div class="header">
+				<span class="col_fade">话题发布指南</span>
+			</div>
+			<div class="inner">
+				<ol>
+					<li>尽量把话题要点浓缩到标题里</li>
+					<li>代码含义和报错可在 <a href="http://segmentfault.com/t/node.js">SegmentFault</a> 提问</li>
+					<li>给话题选择合适的标签能增加浏览</li>
+				</ol>
+			</div>
+		</div>
+	</div>
+	<div id="content">
+		<div class="panel">
+			<div class="header">
+				<ol class="breadcrumb">
+					<li><a href="#/">主页</a><span class="divider">/</span></li>
+					<li class="active">发布话题</li>
+				</ol>
+			</div>
+			<div class="inner post">
+				<!--// 富文本编辑器-->
+				<div style="position:relative">
+					<textarea autofocus="" class="span9" id="title" name="title" rows="1" placeholder="请输入标题" ng-model="topicView.title"></textarea>
+					<script id="container" type="text/plain"><p></p></script>
+				</div>
+				<div class="editor_buttons">
+					<input ng-click="submitContent()" type="button" class="span-primary submit_btn" value="提交">
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+
+</script>

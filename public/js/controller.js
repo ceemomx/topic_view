@@ -102,9 +102,18 @@ ngControllers
 		}
 	})
 	//话题详情
-	.controller('TopicViewCtrl', function ($scope, $http, $routeParams,$sce) {
+	.controller('TopicViewCtrl', function ($scope, $http, $routeParams,$sce,$location, $timeout,$q) {
 		var id = $routeParams.id;
-		console.log(id)
+		console.log(id);
+		var deferred = $q.defer();
+		var promise = deferred.promise;
+		$http.get(API_URL+'users/userinfo').success(function (data) {
+			console.log(data);
+			$scope.user = data.data;
+		});
+		promise.then(function () {
+
+		});
 		$http.get(API_URL+'topic/'+id).success(function (data) {
 			//console.log(data);
 			if(data.status.code == 0){
@@ -138,10 +147,14 @@ ngControllers
 			})
 		};
 		$scope.deleteTopic = function () {
+			console.log(id);
 			$http.get(API_URL+'topic/del/'+id).success(function (data) {
 				console.log(data);
 				if(data.status.code == 0){
 					utils.alert('删除成功！');
+					$timeout(function () {
+						$location.url('/')
+					},1500)
 				}
 			})
 		}
@@ -219,6 +232,56 @@ ngControllers
 				$timeout(function () {
 					$location.url('/login');
 				},1000)
+			})
+		}
+	})
+	.controller('EditTopicCtrl', function ($scope, $http, $routeParams,$timeout,$location) {
+		console.log($routeParams.id);
+		var id = $routeParams.id;
+		UE.getEditor('container',{
+			toolbars: [
+				[
+					'bold',
+					'italic',
+					'underline',
+					'fontsize', //字号
+					'indent',
+					'insertorderedlist',
+					'inserttitle', //插入标题
+					'justifyleft', //居左对齐
+					'justifyright', //居右对齐
+					'justifycenter', //居中对齐
+					'justifyjustify', //两端对齐
+					'simpleupload', //单图上传
+					'source',
+					'undo',
+					'redo'
+				]
+			],
+			initialFrameWidth:'100%'
+		}).ready(function() {
+			//
+			$http.get(API_URL+'topic/'+id).success(function (data) {
+				if(data.status.code == 0){
+					console.log(data.data.content);
+					UE.getEditor("container").setContent(data.data.content);
+					$scope.topicView = data.data;
+				}
+			});
+		});
+		$scope.submitContent = function () {
+			var query = {
+				title:$scope.topicView.title,
+				content:UE.getEditor("container").getContent()
+			};
+			$http.post(API_URL+'topic/edit/'+id,query).success(function (data) {
+				console.log(data)
+				if(data.status.code == 0){
+					utils.alert('修改成功！');
+					$timeout(function () {
+						$location.url('/topic-view/'+id);
+					},1500)
+				}
 			})
 		}
 	})

@@ -98,14 +98,30 @@ exports.api = {
 			return res.api(json);
 		})
 	},
-	del: function () {
+	del: function (req, res) {
 		var id = req.params.id;
-		console.log(id);
-		Topic.removeAsync({_id:id}).then(function(u) {
-			console.log(id)
-			return res.api(u)
+		Topic.removeAsync({_id:id}).then(function() {
+			console.log(id);
+			res.status(200).json({
+				data:{},
+				status:{
+					code:0,
+					msg:"success"
+				}
+			});
 		}).catch(function (err) {
 			return res.api(err)
 		});
+	},
+	edit: function (req,res) {
+		var id = req.params.id;
+		var query = {
+			title:req.body.title,
+			content:req.body.content
+		};
+		Topic.findByIdAndUpdateAsync(id,{$set:query}).then(function (req) {
+			console.log(req)
+			return res.api(req);
+		})
 	}
 };
