@@ -7,7 +7,7 @@
 			<ul class="nav pull-right">
 				<li><a href="#/">首页</a></li>
 				<li><a href="#/about" target="">关于</a></li>
-				<li><a href="#/setting">设置</a></li>
+				<li ng-show="userinfo==null?false:true"><a href="#/setting">设置</a></li>
 				<li ng-show="userinfo==null?true:false"><a href="#/register" rel="nofollow">注册</a></li>
 				<li><a ng-click="log(userinfo)" href="javascript:;" rel="nofollow">{{userinfo==null?'登录':'退出'}}</a></li>
 			</ul>
@@ -54,7 +54,7 @@
 		<div class="panel">
 			<div class="header">
 				<ul class="breadcrumb">
-					<li><a href="/">主页</a><span class="divider">/</span></li>
+					<li><a href="/#/">主页</a><span class="divider">/</span></li>
 				</ul>
 			</div>
 			<div class="inner topic">
