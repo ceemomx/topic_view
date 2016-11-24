@@ -1,16 +1,10 @@
 var connectionString, db, mongoose, options;
 mongoose = require('mongoose');
 
-var mongodb = {
-  "host": "127.0.0.1",
-  "port": "27017",
-  "db": "kz-bbs"
-};
-
 var config = require('config');
-var host  = mongodb.host;
-var port  = mongodb.port;
-var db    = mongodb.db;
+var host  = config.get('mongodb.host');
+var port  = config.get('mongodb.port');
+var db    = config.get('mongodb.db');
 
 
 connectionString = 'mongodb://' + host + ':' + port + '/' + db + '';
