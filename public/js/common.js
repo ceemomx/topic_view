@@ -1,4 +1,4 @@
-var API_URL = 'http://127.0.0.1:3001/';
+var API_URL = 'http://www.yxvcr.com/';
 var utils = {
 	alert: function (content, extraClass, callback) {
 		var toastClass = extraClass || '';
