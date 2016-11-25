@@ -47,22 +47,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 var half_hour = 60 * 1000 * 60 * 12;
-app.use(session({
-	store: new MongoStore({ mongooseConnection: mongoose.connection }),
-	secret: 'kz-bbs@me',
-	resave: true,
-	saveUninitialized: false,
-	cookie: {
-		maxAge: half_hour
-	}
-}));
 
-app.use('/', routes);
-app.use('/users', users);
-
-// /ueditor 入口地址配置 https://github.com/netpi/ueditor/blob/master/example/public/ueditor/ueditor.config.js
-// 官方例子是这样的 serverUrl: URL + "php/controller.php"
-// 我们要把它改成 serverUrl: URL + 'ue'
 app.use("/ueditor/ue", ueditor(path.join(__dirname, 'public'), function(req, res, next) {
 	console.log('ueditor here');
 	// ueditor 客户发起上传图片请求
@@ -91,6 +76,25 @@ app.use("/ueditor/ue", ueditor(path.join(__dirname, 'public'), function(req, res
 		res.redirect('/ueditor/ueditor.config.json')
 	}
 }));
+
+
+app.use(session({
+	store: new MongoStore({ mongooseConnection: mongoose.connection }),
+	secret: 'kz-bbs@me',
+	resave: true,
+	saveUninitialized: false,
+	cookie: {
+		maxAge: half_hour
+	}
+}));
+
+app.use('/', routes);
+app.use('/users', users);
+
+// /ueditor 入口地址配置 https://github.com/netpi/ueditor/blob/master/example/public/ueditor/ueditor.config.js
+// 官方例子是这样的 serverUrl: URL + "php/controller.php"
+// 我们要把它改成 serverUrl: URL + 'ue'
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
