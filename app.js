@@ -64,6 +64,7 @@ app.use('/users', users);
 // 官方例子是这样的 serverUrl: URL + "php/controller.php"
 // 我们要把它改成 serverUrl: URL + 'ue'
 app.use("/ueditor/ue", ueditor(path.join(__dirname, 'public'), function(req, res, next) {
+	console.log('ueditor here');
 	// ueditor 客户发起上传图片请求
 	if(req.query.action === 'uploadimage'){
 		// 这里你可以获得上传图片的信息
