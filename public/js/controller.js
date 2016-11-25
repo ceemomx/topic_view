@@ -237,7 +237,8 @@ ngControllers
 			$http.post(API_URL+'users/setting', query).success(function (data) {
 				console.log(data);
 				if(data.status.code == 0){
-					utils.alert('保存成功！')
+					utils.alert('保存成功！');
+					setTimeout(function(){location.reload(true)},1000);
 				}
 			});
 		};
