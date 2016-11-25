@@ -68,6 +68,7 @@ app.use("/ueditor/ue", ueditor(path.join(__dirname, 'public'), function(req, res
 	if(req.query.action === 'uploadimage'){
 		// 这里你可以获得上传图片的信息
 		var foo = req.ueditor;
+		console.log('****readyuploadimage****');
 		console.log(foo.filename); // exp.png
 		console.log(foo.encoding); // 7bit
 		console.log(foo.mimetype); // image/png
